@@ -1,16 +1,16 @@
-# k-means only works with numerical variables,
-# so don't give the user the option to select
-# a categorical variable
-vars <- setdiff(names(iris), "Species")
+library(shiny)
+library(shinyMobile)
 
-pageWithSidebar(
-  headerPanel('Iris k-means clustering'),
-  sidebarPanel(
-    selectInput('xcol', 'X Variable', vars),
-    selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]),
-    numericInput('clusters', 'Cluster count', 3, min = 1, max = 9)
+shinyApp(
+  ui = f7Page(
+    title = "Tooltip test",
+    f7SingleLayout(
+      navbar = f7Navbar(title = "Tooltip test"),
+      f7Tooltip(
+        f7Button(inputId = "btn", label = "Hover me", color = "blue"),
+        text = "Tooltip text here!"
+      )
+    )
   ),
-  mainPanel(
-    plotOutput('plot1')
-  )
+  server = function(input, output, session) {}
 )
