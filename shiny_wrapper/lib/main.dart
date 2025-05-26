@@ -24,15 +24,13 @@ class _WebViewAppState extends State<WebViewApp> {
   void initState() {
     super.initState();
     controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse('https://danielyang21-simple-rme.share.connect.posit.cloud/'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("testing"),
-      ),
       body: WebViewWidget(controller: controller)
     );
   }
