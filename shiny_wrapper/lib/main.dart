@@ -21,6 +21,7 @@ class WebViewApp extends StatefulWidget {
 
 class _WebViewAppState extends State<WebViewApp> {
     late final WebViewController controller;
+    final String internalHost = 'danielyang21-simple-rme.share.connect.posit.cloud';
 
     @override
     void initState() {
@@ -31,17 +32,21 @@ class _WebViewAppState extends State<WebViewApp> {
         NavigationDelegate(
             onNavigationRequest: (NavigationRequest request) async {
             if (!request.url.contains('danielyang21-simple-rme.share.connect.posit.cloud')) {
-                final url = Uri.parse(request.url);
-                if (await canLaunchUrl(url)) {
-                await launchUrl(url, mode: LaunchMode.externalApplication);
-                return NavigationDecision.prevent;
+                final Uri uri = Uri.parse(request.url);
+                debugPrint('Intercepted URL: ${uri.toString()}');
+
+                if (uri.host != internalHost) {
+                    if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                        return NavigationDecision.prevent;
+                    }
                 }
             }
             return NavigationDecision.navigate;
             },
         ),
         )
-        ..loadRequest(Uri.parse('https://danielyang21-simple-rme.share.connect.posit.cloud/'));
+        ..loadRequest(Uri.parse('https://$internalHost'));
     }
 
 
