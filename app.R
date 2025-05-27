@@ -34,8 +34,7 @@ ui <- fluidPage(
   actionButton("submit","Submit"),
   uiOutput("selectCRM"),
   h4(textOutput('title')),
-  htmlOutput('summary'),  htmlOutput('date'), br(),
-  #uiOutput('doi'),
+  htmlOutput('summary'), uiOutput('doi'), htmlOutput('date'), br(),
   fluidRow(column(DT::dataTableOutput('table'), width=12))
 )
 
