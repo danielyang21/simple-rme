@@ -23,6 +23,8 @@ nrc_dr_all = nrc_dr_all[!is.na(nrc_dr_all$title),]
 
 crms = sort(nrc_dr_all$name)
 names(crms) = crms
+cat("Length", length(entries), "\n")
+
 
 #The ui is the front end
 ui <- fluidPage(
